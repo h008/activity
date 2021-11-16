@@ -1157,6 +1157,9 @@ class FilesHooks {
 	 * @param string $type
 	 */
 	protected function addNotificationsForUser($user, $subject, $subjectParams, $fileId, $path, $isFile, $emailSetting, $notificationSetting, $type = Files_Sharing::TYPE_SHARED) {
+		if(strpos($path,'.announce_') !== false){
+			return;
+		}
 		$user = (string)$user;
 		$selfAction = $user === $this->currentUser->getUID();
 		$app = $type === Files_Sharing::TYPE_SHARED ? 'files_sharing' : 'files';
